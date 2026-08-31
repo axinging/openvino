@@ -1456,7 +1456,6 @@ TEST(SerializationTest, OVTypes_WeightsBank_cpu_roundtrip) {
     expect_tensors_equal(var.get(uid1, "CPU"), res.get(uid1, "CPU"));
 }
 
-<<<<<<< HEAD
 TEST(SerializationTest, CompiledModelDesc_rejects_oob_cpu_closure_index_weightful) {
     using namespace ov::npuw::s11n;
 
@@ -1586,7 +1585,8 @@ TEST(SerializationTest, CompiledModelDesc_rejects_weightless_non_cpu_closure_ind
     OV_EXPECT_THROW_HAS_SUBSTRING(ov::npuw::tests::CompiledModelTestAccess::deserialize_compiled_model_desc(input, ctx),
                                   ov::Exception,
                                   kExpectedNonCpuOobIndexMessage);
-=======
+}
+
 // Sub-byte coverage: the byte size is the *packed* size (ov::util::get_memory_size), which is what
 // both Constant::get_byte_size() and ov::Tensor::get_byte_size() report - not shape_size * size(),
 // which over-reports a 4-bit weight 2x and would reject most of NPUW's mostly-4-bit LLM blobs.
@@ -1719,7 +1719,6 @@ TEST(SerializationTest, OVTypes_LazyTensor_weightless_mmap_file_shrunk_after_imp
 
     // offset (8) <= weights_size (8), but byte_size (8) > weights_size - offset (0)
     OV_EXPECT_THROW_HAS_SUBSTRING(res.eval(), ov::AssertFailure, "[NPU] ORC weight offset/size out of range");
->>>>>>> 9d3824a8ac ([NPUW] Validate weightless Const offset/size against the weights file (CWE-125))
 }
 
 // TODO: add tests on CompiledModel and LLMCompiledModel once tests have access to any model to test on
